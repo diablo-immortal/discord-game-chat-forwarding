@@ -1,0 +1,1 @@
+# discord-game-chat-forwarding
