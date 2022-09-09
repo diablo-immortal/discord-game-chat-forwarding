@@ -3,7 +3,7 @@
 - Game: Diablo Immortal
 - For simultaneously forwarding chat between in-game clan chat and discord. 
 
-## preparation
+## Preparation
 
 - An alt at a minimum of level 43, joined the clan.
 - A spare PC.
@@ -20,3 +20,5 @@
 - In discord, invite the bot using the bot's link (see above link). 
 - Create a new channel (suggested), assign the bot to the channel.
 - When the bot is running, type `--config receiving channel`
+
+*Require `tesseract>=2.0`. Config path if necessary.

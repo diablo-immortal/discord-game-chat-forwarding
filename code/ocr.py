@@ -45,8 +45,8 @@ def get_bw_im(chat_im, channel):
     text_im_data = np.uint8(np.where((np.abs(chat_data - text_color) < CUTOFF).all(axis=2) | (np.abs(chat_data - TEXT_COLOR_ITEM) < CUTOFF).all(axis=2) , BLACK, WHITE))
     bw_text_im = PIL.Image.fromarray(text_im_data)
     
-    bw_user_im.save("temp1.png")
-    bw_text_im.save("temp2.png")
+    # bw_user_im.save("temp1.png")
+    # bw_text_im.save("temp2.png")
     return bw_user_im, bw_text_im
 
 
@@ -87,7 +87,7 @@ def match_user_text(users, user_pos, texts, text_pos):
 
 
 def ocr(channel="clan"):
-    chat_history = p.locateOnScreen('resources/chathistory.png', region=(1260, 245, 1440, 1000), confidence=0.75)
+    chat_history = p.locateOnScreen('../resources/chathistory.png', region=(1260, 245, 1440, 1000), confidence=0.75)
     top = chat_history.top if chat_history else None
     chat_im = get_chat_im(top)
     bw_user_im, bw_text_im = get_bw_im(chat_im, channel)

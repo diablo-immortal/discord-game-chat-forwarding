@@ -5,15 +5,15 @@ import discord
 from discord.ext import tasks
 from ocr import ocr
 
-if os.path.exists("resources/token.txt"):
-    with open("resources/token.txt", 'r') as f:
+if os.path.exists("../resources/token.txt"):
+    with open("../resources/token.txt", 'r') as f:
         TOKEN = f.readlines()[0]
 else:
     print("save your discord bot token in resource/token.txt")
     exit()
 
-if os.path.exists("resources/channelID.txt"):
-    with open("resources/channelID.txt", 'r') as f:
+if os.path.exists("../resources/channelID.txt"):
+    with open("../resources/channelID.txt", 'r') as f:
         CHANNEL_ID = int(f.readlines()[0])
 else:
     CHANNEL_ID = ''
@@ -45,7 +45,7 @@ class MyClient(discord.Client):
             return
         if message.content == "--config receiving channel":
             self.channel = message.channel
-            with open("resources/channelID.txt", "w") as f:
+            with open("../resources/channelID.txt", "w") as f:
                 f.write(str(message.channel.id))
             return
 
@@ -59,10 +59,10 @@ class MyClient(discord.Client):
     @tasks.loop(seconds=4)
     async def dc_to_game(self):
 
-##        if p.locateOnScreen('resources/ok.png', region=(1000, 700, 1250, 800), confidence=0.8):
+##        if p.locateOnScreen('../resources/ok.png', region=(1000, 700, 1250, 800), confidence=0.8):
 ##                p.click(1050 + int(random.random() * 150), 720 + int(random.random() * 60))
 ##                time.sleep(0.5 + random.random()*0.3)
-        if p.locateOnScreen('resources/cancel.png', region=(650, 700, 950, 800), confidence=0.8):
+        if p.locateOnScreen('../resources/cancel.png', region=(650, 700, 950, 800), confidence=0.8):
                 p.click(700 + int(random.random() * 200), 720 + int(random.random() * 60))
                 time.sleep(0.5 + random.random()*0.3)
 
