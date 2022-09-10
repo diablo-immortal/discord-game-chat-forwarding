@@ -43,26 +43,29 @@ class MyClient(discord.Client):
     async def on_message(self, message):
         if message.author.id == self.user.id:
             return
-        if message.content == "--config receiving channel":
+        if message.content == "--config forwarding channel":
             self.channel = message.channel
             with open("../resources/channelID.txt", "w") as f:
                 f.write(str(message.channel.id))
+            return
+        if message.channel.id != self.channel.id:
             return
 
         if len(message.content) > 1000:
             await self.channel.send(f"Message from {message.author.nick} is too long. Maximum length is 1000 characters (including space).")
             return
-        self.msg_to_send.append(f"{message.author.nick}: {message.content}")
-        print(f'From discord  -  {message.author.nick}: {message.content}')
+        name = message.author.nick or message.author.name
+        self.msg_to_send.append(f"{name}: {message.content}")
+        print(f'From discord  -  {name}: {message.content}')
 
 
     @tasks.loop(seconds=4)
     async def dc_to_game(self):
 
-##        if p.locateOnScreen('../resources/ok.png', region=(1000, 700, 1250, 800), confidence=0.8):
+##        if p.locateOnScreen('resources/ok.png', region=(1000, 700, 1250, 800), confidence=0.8):
 ##                p.click(1050 + int(random.random() * 150), 720 + int(random.random() * 60))
 ##                time.sleep(0.5 + random.random()*0.3)
-        if p.locateOnScreen('../resources/cancel.png', region=(650, 700, 950, 800), confidence=0.8):
+        if p.locateOnScreen('resources/cancel.png', region=(650, 700, 950, 800), confidence=0.8):
                 p.click(700 + int(random.random() * 200), 720 + int(random.random() * 60))
                 time.sleep(0.5 + random.random()*0.3)
 
@@ -72,18 +75,14 @@ class MyClient(discord.Client):
             p.click(50 +int(random.random() * 200), 280 + int(random.random() * 40))
             time.sleep(0.5 + random.random()*0.5)
             p.click(50 +int(random.random() * 200), 280 + int(random.random() * 40))
-##            p.click(1830 + int(random.random() * 40), 30 + int(random.random() * 40))
-##            time.sleep(random.random()*0.2 + 0.1)
-##            key_to_press = ['w', 'd', 's'][int(random.random() * 2.99)]
-##            p.keyDown(key_to_press)
-##            time.sleep(random.random()*0.1 + 0.1)
-##            p.keyUp(key_to_press)
-##            time.sleep(random.random()*0.1 + 0.05)
-##            p.press('enter')
+            
+##        if p.locateOnScreen('resources/menu.png', region=(1860, 10, 1910, 80), confidence=0.8):
+##            time.sleep(random.random()*0.3 + 0.1)
+##            p.press('.')
 ##            time.sleep(random.random()*0.2 + 0.1)
 ##            p.click(100 + int(random.random() * 300), 800 + int(random.random() * 160))
-            time.sleep(random.random()*0.2 + 0.1)
-            
+##            time.sleep(random.random()*0.2 + 0.1)
+        
         msg = self.to_send()
         if msg:
             await self.channel.send('\n'.join(map(lambda x: "**" + ":**  ".join(x), msg)))

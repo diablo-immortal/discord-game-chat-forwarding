@@ -15,6 +15,8 @@ TEXT_COLOR_ITEM = np.array([248, 174, 117])
 BLACK = 0
 WHITE = 255
 CUTOFF = np.ones(3) * 10
+
+# tesseract install directory
 pytesseract.pytesseract.tesseract_cmd = 'C:/Program Files (x86)/Tesseract-OCR/tesseract.exe'
 te_config = "-c tessedit_char_whitelist='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.:!?@#<>$%^&*()[]_-+=/ '"
 
@@ -55,7 +57,7 @@ def read_im(bw_im):
     pos_top = []
     text = []
     for i in range(len(data["word_num"])):
-        if data["word_num"][i] > 0 and data["top"][i] > 5:
+        if data["word_num"][i] > 0 and data["top"][i] > 6:
             pos_top.append(data["top"][i])
             text.append(data["text"][i])
     return pos_top, text
